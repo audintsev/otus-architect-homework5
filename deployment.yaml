@@ -1,20 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: hello-deployment
+    name: homework5-deployment
 spec:
-    replicas: 2
+    replicas: 4
     selector:
        matchLabels:
-          app: hello-py-app
+          app: homework5-app
     template:
        metadata:
           labels:
-             app: hello-py-app
+             app: homework5-app
        spec:
           containers:
-          - name: hello-py
-            image: hello-py:v1
+          - name: app
+            image: udintsev/otus-architect-homework5:0.1
             ports:
-              - name: web 
-                containerPort: 80
+              - name: web
+                containerPort: 8000
+            livenessProbe:
+              httpGet:
+                port: 8000
+                path: /
+              initialDelaySeconds: 2
+              periodSeconds: 5
+              timeoutSeconds: 2
+            readinessProbe:
+              httpGet:
+                port: 8000
+                path: /health
+              initialDelaySeconds: 2
+              periodSeconds: 5

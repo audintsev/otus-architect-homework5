@@ -1,12 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-service
+  name: homework5-service
 spec:
   selector:
-    app: hello-py-app
+    app: homework5-app
   ports:
     - protocol: TCP
-      port: 9000
+      port: 8000
       targetPort: web
-  type: NodePort
